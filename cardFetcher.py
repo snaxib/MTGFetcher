@@ -39,6 +39,8 @@ class S(BaseHTTPRequestHandler):
         #print self.rfile.read(int(self.headers.getheader('Content-Length')))
         #self.wfile.write(self.rfile.read(int(self.headers.getheader('Content-Length'))))
 	#self.send_response(200,all_cards)
+        
+
         self.wfile.write(all_cards)
 
 def parseCardData():

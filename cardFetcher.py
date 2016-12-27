@@ -2,6 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 import socket
 import sys
+import json
+
 
 #HOST = ''
 #PORT = 8888
@@ -37,10 +39,18 @@ class S(BaseHTTPRequestHandler):
         
     def do_POST(self):
         # Doesn't do anything with posted data
+        print 'Recieved A POST!'
         self._set_headers()
         print self.rfile.read(int(self.headers.getheader('Content-Length')))
         self.wfile.write(self.rfile.read(int(self.headers.getheader('Content-Length'))))
-        
+	self.send_response(200)
+
+
+def parseCardData():
+    with open('AllCards.json') as data_file:
+    	data = json.load(data_file)
+    print data        
+
 def run(server_class=HTTPServer, handler_class=S, port=80):
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)
@@ -53,6 +63,7 @@ if __name__ == "__main__":
     if len(argv) == 2:
         run(port=int(argv[1]))
     else:
+        parseCardData()
         run()
 
 
@@ -60,11 +71,10 @@ parsedCardName = ''
 cardImg = ''
 cardOracle = ''
 
-def parseCardName(card):
+def parseCardNamee(card):
 	url = "+".join( card.split() )
 	return url
-
-
+    
 
 cardName = raw_input("Which Card do you want the image for? ")
 

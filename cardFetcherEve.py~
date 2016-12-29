@@ -1,0 +1,70 @@
+#from eve import Eve
+
+#app = Eve()
+#
+#if __name__ == '__main__':
+#    app.run()
+#!flask/bin/python
+from flask import Flask, jsonify
+
+app = Flask(__name__)
+
+cards = [
+  {
+    'Air Elemental': {
+      'cmc': 5,
+      'colorIdentity': [
+        'U'
+      ],
+      'colors': [
+        'Blue'
+      ],
+      'imageName': 'air elemental',
+      'layout': 'normal',
+      'manaCost': '{3}{U}{U}',
+      'name': 'Air Elemental',
+      'power': '4',
+      'subtypes': [
+        'Elemental'
+      ],
+      'text': 'Flying',
+      'toughness': '4',
+      'type': 'Creature - Elemental',
+      'types': [
+        'Creature'
+      ]
+    }
+  },
+  {
+    'Ancestral Recall': {
+      'cmc': 1,
+      'colorIdentity': [
+        'U'
+      ],
+      'colors': [
+        'Blue'
+      ],
+      'imageName': 'ancestral recall',
+      'layout': 'normal',
+      'manaCost': '{U}',
+      'name': 'Ancestral Recall',
+      'text': 'Target player draws three cards.',
+      'type': 'Instant',
+      'types': [
+        'Instant'
+      ]
+    }
+  }
+]
+
+
+@app.route('/')
+def index():
+    return "Hello, World!"
+
+@app.route('/cards', methods=['GET'])
+def cards():
+    return jsonify({'cards':cards})
+
+if __name__ == '__main__':
+    app.run(debug=True)

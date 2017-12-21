@@ -26,18 +26,21 @@ def servecards():
 def serveSingleCard():
     print "Hello!"
     if request.data:
-        print "Hi I'm hurr"
+        #print "Hi I'm hurr"
         raw_data = request.data
-        print raw_data
+        #print raw_data
+        #print "about to load json"
+        data = json.loads(raw_data)
+        #print "JSON loaded - about to assign wantedCard"
+        wantedCard = data['card']
+        #print "here is the card we want: " + str(wantedCard)
+        returnCard = cards[str(wantedCard)]
+        return str(returnCard)
     else:
         print "No request object."
-    print "about to load json"
-    data = json.loads(raw_data)
-    print "JSON loaded - about to assign wantedCard"
-    wantedCard = data['card']
-    print "here is the card we want: " + str(wantedCard)
-    returnCard = cards[str(wantedCard)]
-    return str(returnCard)
+        return "None"
+
+    
     
 
 if __name__ == '__main__':

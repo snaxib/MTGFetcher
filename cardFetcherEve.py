@@ -12,6 +12,8 @@ app = Flask(__name__)
 
 cards = json.load(open('AllCards.json'))
 
+def getCardImageURL():
+    
 
 
 @app.route('/')
